@@ -124,16 +124,82 @@ Code review
 review my changes and suggest improvements
 ```
 
-## Claude Code Commands
+# Claude Code CLI Reference
 
-| Command | What it does | Example |
-|-------|-------|-------|
-| `claude` | Start interactive mode | `claude` |
-| `claude "task"` | Run a one-time task | `claude "fix the build error"` |
-| `claude -p "query"` | Run one-off query, then exit | `claude -p "explain this function"` |
-| `claude -c` | Continue most recent conversation in current directory | `claude -c` |
-| `claude -r` | Resume a previous conversation | `claude -r` |
-| `claude commit` | Create a Git commit | `claude commit` |
-| `/clear` | Clear conversation history | `/clear` |
-| `/help` | Show available commands | `/help` |
-| `exit` or `Ctrl + C` | Exit Claude Code | `exit` |
+Complete reference for the **Claude Code command-line interface**, including commands and flags.
+
+---
+
+# CLI Commands
+
+Start sessions, pipe content, resume conversations, and manage authentication with these commands.
+
+| Command | Description | Example |
+|------|------|------|
+| `claude` | Start interactive session | `claude` |
+| `claude "query"` | Start interactive session with initial prompt | `claude "explain this project"` |
+| `claude -p "query"` | Run query and exit (print mode) | `claude -p "explain this function"` |
+| `cat file \| claude -p "query"` | Process piped content | `cat logs.txt \| claude -p "explain"` |
+| `claude -c` | Continue most recent conversation | `claude -c` |
+| `claude -c -p "query"` | Continue conversation via SDK | `claude -c -p "Check for type errors"` |
+| `claude -r "<session>" "query"` | Resume session by ID or name | `claude -r "auth-refactor" "Finish this PR"` |
+| `claude update` | Update Claude Code to latest version | `claude update` |
+| `claude auth login` | Log in to Anthropic account | `claude auth login --email user@example.com` |
+| `claude auth logout` | Log out of account | `claude auth logout` |
+| `claude auth status` | Show authentication status | `claude auth status` |
+| `claude agents` | List configured subagents | `claude agents` |
+| `claude mcp` | Configure MCP servers | `claude mcp` |
+| `claude remote-control` | Start remote control session | `claude remote-control` |
+
+---
+
+# Useful CLI Flags
+
+Customize Claude's behavior with flags.
+
+| Flag | Description | Example |
+|------|------|------|
+| `--add-dir` | Add extra directories Claude can access | `claude --add-dir ../apps ../lib` |
+| `--agent` | Specify which agent to use | `claude --agent my-custom-agent` |
+| `--agents` | Define custom subagents using JSON | `claude --agents '{...}'` |
+| `--append-system-prompt` | Add instructions to the default prompt | `claude --append-system-prompt "Always use TypeScript"` |
+| `--continue` / `-c` | Continue last conversation | `claude --continue` |
+| `--debug` | Enable debug logging | `claude --debug "api,mcp"` |
+| `--model` | Specify model (sonnet, opus) | `claude --model sonnet` |
+| `--output-format` | Specify output format | `claude -p "query" --output-format json` |
+| `--resume` / `-r` | Resume specific session | `claude --resume auth-refactor` |
+| `--system-prompt` | Replace default system prompt | `claude --system-prompt "You are a Python expert"` |
+| `--tools` | Restrict tools Claude can use | `claude --tools "Bash,Edit,Read"` |
+| `--verbose` | Enable verbose logging | `claude --verbose` |
+| `--version` / `-v` | Show version number | `claude -v` |
+
+---
+
+# System Prompt Flags
+
+These flags control how you customize Claude’s system prompt.
+
+| Flag | Behavior | Modes | Use Case |
+|------|------|------|------|
+| `--system-prompt` | Replace entire default prompt | Interactive + Print | Full control of Claude behavior |
+| `--system-prompt-file` | Replace prompt with file contents | Print only | Use version-controlled prompts |
+| `--append-system-prompt` | Append instructions to default prompt | Interactive + Print | Add rules without losing defaults |
+| `--append-system-prompt-file` | Append file contents to default prompt | Print only | Add version-controlled rules |
+
+---
+
+# Example: Custom Agents
+
+```bash
+claude --agents '{
+  "code-reviewer": {
+    "description": "Expert code reviewer",
+    "prompt": "You are a senior code reviewer focusing on code quality and security",
+    "tools": ["Read", "Grep", "Glob", "Bash"],
+    "model": "sonnet"
+  },
+  "debugger": {
+    "description": "Debugging specialist",
+    "prompt": "Analyze errors and identify root causes"
+  }
+}'
