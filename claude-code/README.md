@@ -47,3 +47,79 @@ curl -fsSL https://claude.ai/install.sh | bash
 curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd
 ```
 
+## After installation, 
+run **claude** at your terminal. The first time you run this command you will be prompted to authenticate
+
+### Ask your first questions 
+
+```bash 
+what does this project do?
+
+what technologies does this project use?
+
+where is the main entry point?
+
+explain the folder structure
+```
+
+Ask Claude about its own capabilities: 
+
+```bash 
+what can Claude Code do?
+
+how do I create custom skills in Claude Code?
+
+can Claude Code work with Docker?
+```
+
+Make your first code change: 
+
+```bash 
+add a hello world function to the main file
+```
+
+Use Git with Claude Code 
+
+```bash 
+what files have I changed?
+
+commit my changes with a descriptive message
+
+create a new branch called feature/quickstart
+
+show me the last 5 commits
+
+help me resolve merge conflicts
+```
+
+Fix a bug or add a feature
+
+```bash
+add input validation to the user registration form
+
+there's a bug where users can submit empty forms - fix it
+```
+
+Test out other common workflows
+
+```bash
+refactor the authentication module to use async/await instead of callbacks
+```
+
+Write tests
+
+```bash
+write unit tests for the calculator functions
+```
+
+Update documentation
+
+```bash 
+update the README with installation instructions
+```
+
+Code review
+
+```bash
+review my changes and suggest improvements
+```
