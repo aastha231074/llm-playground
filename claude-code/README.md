@@ -203,5 +203,6 @@ claude --agents '{
     "prompt": "Analyze errors and identify root causes"
   }
 }'
+```
 
 ![Controlling Context](controlling-context.png)
